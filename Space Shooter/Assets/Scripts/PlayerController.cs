@@ -18,6 +18,22 @@ public class PlayerController : MonoBehaviour {
     public float tilt;
     public Boundary boundary;
 
+    public GameObject shot;
+    public Transform shotSpawnRight;
+    public Transform shotSpawnLeft;
+    public float fireRate;
+
+    private float nextFire;
+
+    void Update() {
+        //Ao perceber que botao esquerdo do mouse for clicado, criar as balas no espaço.
+        if (Input.GetButton("Fire1") && Time.time > nextFire) {
+            nextFire = Time.time + fireRate;
+            Instantiate(shot, shotSpawnRight.position, shotSpawnRight.rotation);      
+            Instantiate(shot, shotSpawnLeft.position, shotSpawnLeft.rotation);
+        }
+    }
+
 
     void FixedUpdate() {
         float moveHorizontal = Input.GetAxis("Horizontal");
