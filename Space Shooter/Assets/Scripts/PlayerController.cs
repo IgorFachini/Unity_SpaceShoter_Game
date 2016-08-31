@@ -9,9 +9,11 @@ public class Boundary {
 public class PlayerController : MonoBehaviour {
 
     private Rigidbody rb;
+    private AudioSource audioSource;
 
     void Start() {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public float speed;
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour {
             nextFire = Time.time + fireRate;
             Instantiate(shot, shotSpawnRight.position, shotSpawnRight.rotation);      
             Instantiate(shot, shotSpawnLeft.position, shotSpawnLeft.rotation);
+            audioSource.Play();
         }
     }
 
