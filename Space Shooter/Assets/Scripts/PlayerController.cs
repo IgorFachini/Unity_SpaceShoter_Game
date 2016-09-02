@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour {
     public Boundary boundary;
 
     public GameObject shot;
-    public Transform shotSpawnRight;
-    public Transform shotSpawnLeft;
+    public Transform[] shotSpawns;
+   // public Transform shotSpawnLeft;
     public float fireRate;
 
     private float nextFire;
@@ -31,8 +31,11 @@ public class PlayerController : MonoBehaviour {
         //Ao perceber que botao esquerdo do mouse for clicado, criar as balas no espaço.
         if (Input.GetButton("Fire1") && Time.time > nextFire) {
             nextFire = Time.time + fireRate;
-            Instantiate(shot, shotSpawnRight.position, shotSpawnRight.rotation);      
-            Instantiate(shot, shotSpawnLeft.position, shotSpawnLeft.rotation);
+            foreach(var shotspawn in shotSpawns) {
+                Instantiate(shot, shotspawn.position, shotspawn.rotation);
+            }
+           // Instantiate(shot, shotSpawnRight.position, shotSpawnRight.rotation);      
+           // Instantiate(shot, shotSpawnLeft.position, shotSpawnLeft.rotation);
             audioSource.Play();
         }
     }
